@@ -7,9 +7,11 @@ document.addEventListener("DOMContentLoaded", function() {
     captureButton.addEventListener("click", function() {
         chrome.tabs.captureVisibleTab(function(screenshotDataUrl) {
             const screenshotImage = new Image();
+            console.log(screenshotImage);
             screenshotImage.src = screenshotDataUrl;
+            const getBase64StringFromDataURL = screenshotDataUrl.replace('data:', '').replace(/^.+,/, '');
             //screenshotContainer.appendChild(screenshotImage);
-            getWordList(screenshotImage);
+            getWordList(getBase64StringFromDataURL);
         });
     }); 
 });
@@ -19,6 +21,22 @@ const getWordList = async (data) => {
         console.log(data);
         const response = await fetch('https://extension-tips.glitch.me/tips.json');
         const tips = await response.json();
+        
+        const result = await fetch('http://127.0.0.1:5000/dictionary', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+
         renderWordList(tips);
     }
 };
@@ -45,3 +63,4 @@ const speakText = (word) => {
     utterThis.lang = "fr-FR";
     synth.speak(utterThis);
 }
+
