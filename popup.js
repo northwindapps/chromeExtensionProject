@@ -42,5 +42,6 @@ const renderWordList = (list) => {
 const speakText = (word) => {
     const synth = window.speechSynthesis;
     const utterThis = new SpeechSynthesisUtterance(word);
+    utterThis.lang = "fr-FR";
     synth.speak(utterThis);
 }
