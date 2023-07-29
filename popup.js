@@ -25,12 +25,22 @@ const getWordList = async (data) => {
 
 const renderWordList = (list) => {
     for (let index = 0; index < list.length; index++) {
-        let buttonElement = document.createElement('button')
-        buttonElement.innerHTML = 'hello';
+        let buttonElement = document.createElement('button');
+        let word = 'hello';
+        buttonElement.value = word;
+        buttonElement.addEventListener("click", function() {
+            speakText(word);
+        }, false);
+        buttonElement.innerHTML = word;
         let liElement = document.createElement('li');
         liElement.appendChild(buttonElement);
         wordList.appendChild(liElement);
     }
-    console.log(list);
+    // console.log(list);
 }
 
+const speakText = (word) => {
+    const synth = window.speechSynthesis;
+    const utterThis = new SpeechSynthesisUtterance(word);
+    synth.speak(utterThis);
+}
