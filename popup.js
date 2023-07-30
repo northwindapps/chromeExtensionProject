@@ -18,16 +18,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const getWordList = async (data) => {
     if(typeof data !== 'undefined'){
-        console.log(data);
-        const response = await fetch('https://extension-tips.glitch.me/tips.json');
-        const tips = await response.json();
-        
         const result = await fetch('http://127.0.0.1:5000/dictionary', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+        //JSON.stringify({key: 'value'})
         })
         .then((response) => response.json())
         .then((data) => {
