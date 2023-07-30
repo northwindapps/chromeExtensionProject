@@ -31,20 +31,19 @@ const getWordList = async (data) => {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log('Success:', data);
+            console.log('Success:', data['result']);
+            renderWordList(data['result']);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
-
-        renderWordList(tips);
     }
 };
 
 const renderWordList = (list) => {
     for (let index = 0; index < list.length; index++) {
         let buttonElement = document.createElement('button');
-        let word = 'hello';
+        let word = list[index];
         buttonElement.value = word;
         buttonElement.addEventListener("click", function() {
             speakText(word);
