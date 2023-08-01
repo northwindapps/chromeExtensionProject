@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 const getWordList = async (data) => {
     if(typeof data !== 'undefined'){
-        const result = await fetch('http://127.0.0.1:5000/dictionary', {
+        const result = await fetch('http://18.182.46.190/dictionary', {
         method: 'POST', // or 'PUT'
         headers: {
             'Content-Type': 'application/json',
@@ -54,9 +54,27 @@ const renderWordList = (list) => {
 }
 
 const speakText = (word) => {
+    word = word.replace(/\W/g, ' ');
     const synth = window.speechSynthesis;
     const utterThis = new SpeechSynthesisUtterance(word);
-    utterThis.lang = "fr-FR";
+    const language = document.getElementById("lang").value;
+    utterThis.lang = "en-US";
+    if(typeof language !== 'undefined'){
+        utterThis.lang = language;
+    }
+    const voices = synth.getVoices();
+    for (let index = 0; index < voices.length; index++) {
+        if (typeof voices[index].lang !== "undefined") {
+            if(voices[index].lang === utterThis.lang){
+                utterThis.voice = voices[index]
+            } 
+        }
+        
+    }
+    console.log(utterThis.voice);
+    console.log(utterThis.lang);
+    utterThis.pitch = 1.0;
     synth.speak(utterThis);
 }
+
 

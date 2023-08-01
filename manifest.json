@@ -1,17 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Screenshot Extension",
-  "version": "1.0",
+  "name": "pix2speech",
+  "version": "1.0.1",
   "permissions": [
     "activeTab"
   ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/hello_extensions.png",
-      "48": "images/hello_extensions.png",
-      "128": "images/hello_extensions.png"
+      "16": "images/lemonade_1591829.png",
+      "48": "images/lemonade_1591829.png",
+      "128": "images/lemonade_1591829.png"
     }
   },
-  "host_permissions": ["https://extension-tips.glitch.me/*"]
+  "icons": {
+    "16": "images/lemonade_1591829.png",
+    "32": "images/lemonade_1591829.png",
+    "48": "images/lemonade_1591829.png",
+    "128": "images/lemonade_1591829.png"
+  },
+  "host_permissions": ["http://18.182.46.190/*"]
 }
